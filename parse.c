@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
-char pro[3][10] =  {"A->aBa","B->B","B->@"};
+char prod[3][10] =  {"A->aBa","B->bB","B->@"};
 char first[3][10] ={"a","b","@"};
-char follow[3][10] ={"s","a","a"};
+char follow[3][10] ={"$","a","a"};
 char table[3][4][10];
 char input[10];
 int top=-1;
@@ -22,7 +23,7 @@ void pop()
 
 void display()
 {
-	int ;
+	int i;
 	for(i=top;i>=0;i--)
 		printf("%c",stack[i]);
 }
@@ -46,7 +47,7 @@ void main()
 	for(i=0;i<3;i++)
 		for(j=0;j<4;j++)
 			strcpy(table[i][j],"e");
-			printf("\n Grammar:\n");
+			printf("\nGrammar:\n");
 for(i=0;i<3;i++)
 	printf("%s\n",prod[i]);
 printf("\nfirst={%s%s%s}",first[0],first[1],first[2]);
@@ -72,19 +73,20 @@ for(i=0;i<3;i++)
 printf("\n---------------------------------\n");
 for(i=0;i<3;i++)
 	for(j=0;j<4;j++){
-		printf("%10s",table[i][j]);
-		if(i==3)
+		printf("%-10s",table[i][j]);
+		if(j==3)
 			printf("\n------------------------------------\n");
-printf("Enter the input string terminated with $ to parse:");
+}
+printf("\nEnter the input string terminated with $ to parse:");
 scanf("%s",input);
 for(i=0;input[i]!='\0';i++)
-	if(input[i]!='a')&&(input[i]!='b')&&(input[i]!='$'))
+	if((input[i]!='a')&&(input[i]!='b')&&(input[i]!='$'))
 	{
 		printf("invalid string");
 		exit(0);
 	}
 
-if(input[i-1!='$')
+if(input[i-1]!='$')
 {
 	printf("\n\nInput string entered without end marker $");
 	exit(0);
@@ -94,7 +96,7 @@ push('$');
 push('A');
 i=0;
 printf("\n\n");
-printf(" stack\t input\t action"):
+printf(" stack\t input \taction");
 printf("\n---------------------------------\n");
 while(input[i]!='$'&&stack[top]!='$')
 {
@@ -117,7 +119,7 @@ while(input[i]!='$'&&stack[top]!='$')
 		}
 		else
 		{
-			printf("\napply production %s\n",curp);
+			printf("\tapply production %s\n",curp);
 			if(curp[3]=='@')
 				pop();
 			else
@@ -128,13 +130,14 @@ while(input[i]!='$'&&stack[top]!='$')
 					push(curp[j]);
 			}
 		}
+						}
 	}
-}
 
+}
 display();
 printf("\t\t%s\t",(input+i));
 printf("\n---------------------------------------\n");
-if(stack[top]=='$'&&input[i]=='$s)
+if(stack[top]=='$'&&input[i]=='$')
 {
 	printf("\nvalid string- Accepted\n");
 }
