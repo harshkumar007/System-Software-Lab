@@ -11,7 +11,7 @@ void main()
 {
 	printf("Grammar");
 	printf("\nE->E+T|T \nT->T*F|F \nF->(E)|id");
-	printf("enter the input symbol");
+	printf("\nenter the input symbol\n");
 	scanf("%s",ip_sym);
 	printf("\n stack implementation table\n");
 	printf("\nstack \t input symbol \t action\n");
@@ -130,12 +130,12 @@ void main()
 			}
 			if(!strcmp(stack,"E")&&ip_sym[ip_ptr]=='\0')
 			{
-				printf("\n$%s\t%s$\tACCEPT",stack,ip_sym);
+				printf("\n$%s\t%s$\tACCEPT\n",stack,ip_sym);
 				exit(0);
 			}
 			if(flag==0)
 			{
-				printf("\n$%s\t%s$\tREJECT",stack,ip_sym);
+				printf("\n$%s\t%s$\tREJECT\n",stack,ip_sym);
 				exit(0);
 			}
 			if(flag==2)
