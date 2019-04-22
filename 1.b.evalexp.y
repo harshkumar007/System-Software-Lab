@@ -1,31 +1,35 @@
+
 %{
 	#include <stdio.h>
 	extern int yylex();
 %}
 
 %token id
-%left '+''-'
-%left '*''/'
+%left '+' '-'
+%left '*' '/'
 
 %%
-	expr: E {printf("Result=%d",$1);}
-	| E: E '+' E {$$=$1+$3;}
-	| E: E '-' E {$$=$1-$3;}
-	| E: E '*' E {$$=$1*$3;}
-	| E: E '/' E {$$=$1/$3;}
-	| E: '(' E ')' {$$=$1;}
-	| E: id  {$$=$1;}
-	;
-%%
+exp:E{ printf("Result=%d",$1);}
+E:E'+'E {$$=$1+$3;}
+ |E'-'E {$$=$1-$3;}
+ |E'*'E {$$=$1*$3;}
+ |E'/'E {if($3==0){
+	 printf("invalid");
+	 return 0;
+  }
+  else $$=$1/$3;}
 
-int main()
+ |'('E')' {$$=$2;}
+ |id {$$=$1;}
+%%
+void main()
 {
-	printf("Enter an Expression to evaluate:\n");
+	printf("Enter expression:");
 	yyparse();
-	printf("Valid Expression");
-	
-	void yyerror()
-	{
-		printf("Invalid Epression");
-	}
+}
+
+int yyerror()
+{
+printf("invalid");
+return 0;
 }
