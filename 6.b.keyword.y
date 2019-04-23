@@ -1,4 +1,6 @@
+
 %{
+#include <stdio.h>
 extern int yylex();
 extern FILE *yyin;
 int id=0,key=0,op=0;
@@ -19,25 +21,17 @@ input: ID input {id++;}
 
 void main()
 {
-int n;
-printf("Enter choice 1:input from file 2:input from command prompt\n");
-scanf("%d",&n);
-if(n==1){
-	yyin = fopen("text.txt","r");
-	yyparse();
-	fclose(yyln);
-
+		printf("Printing the content of input.c and no. of its keyword, operator and id\n");
+		yyin = fopen("input.c","r");
+		yyparse();
+		fclose(yyin);
+		printf("keyword=%d and operator=%d and id=%d\n",key,op,id);
 }
-if(n==2){
-	yyparse();
-}
-
-printf("keyword=%d and operator=%d and id=%d",key,op,ip);
 
 int yyerror()
 {
-printf("invalid");
-return 0;
+		printf("invalid");
+		return 0;
 }
 
 

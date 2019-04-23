@@ -9,7 +9,7 @@
 %left '*' '/'
 
 %%
-exp:E{ printf("Result=%d",$1);}
+exp:E{ printf("Result=%d\n",$1);}
 E:E'+'E {$$=$1+$3;}
  |E'-'E {$$=$1-$3;}
  |E'*'E {$$=$1*$3;}
